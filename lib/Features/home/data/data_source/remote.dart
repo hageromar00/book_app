@@ -6,15 +6,15 @@ import 'package:book_app/core/utils/save_local_data.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class RemoteDate {
-  Future<List<BookEntity>> fetchfeaturebook();
-  Future<List<BookEntity>> fetchNewestbook();
+  Future<List<BookEntity>> fetchfeaturebookRemote();
+  Future<List<BookEntity>> fetchNewestbookRemote();
 }
 
 class RemoteDateImpl implements RemoteDate {
   final ApiService apiservice;
   RemoteDateImpl(this.apiservice);
   @override
-  Future<List<BookEntity>> fetchfeaturebook() async {
+  Future<List<BookEntity>> fetchfeaturebookRemote() async {
     var data = await apiservice.getservice(
         endpoint: 'volumes?Filtering=free-ebooks&q=programming');
     List<BookEntity> book = [];
@@ -31,7 +31,7 @@ class RemoteDateImpl implements RemoteDate {
   // }
 
   @override
-  Future<List<BookEntity>> fetchNewestbook() async {
+  Future<List<BookEntity>> fetchNewestbookRemote() async {
     var data = await apiservice.getservice(
         endpoint:
             'volumes?Filtering=free-ebooks&Sorting=newest &q=computer science');
