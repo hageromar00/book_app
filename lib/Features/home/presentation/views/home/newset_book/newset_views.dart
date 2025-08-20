@@ -1,4 +1,5 @@
 import 'package:book_app/Features/home/data/model/book_model/book_model.dart';
+import 'package:book_app/Features/home/domain/entity/book_entity.dart';
 import 'package:book_app/Features/home/presentation/views/home/widget/Custom_image.dart';
 import 'package:book_app/Features/home/presentation/views/home/widget/rating.dart';
 import 'package:book_app/core/utils/const.dart';
@@ -9,7 +10,7 @@ import 'package:go_router/go_router.dart';
 
 class NewsetItem extends StatelessWidget {
   const NewsetItem({super.key, required this.model});
-  final BookModel model;
+  final BookEntity model;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class NewsetItem extends StatelessWidget {
         child: Row(
           children: [
             CustomImage(
-              image: model.volumeInfo?.imageLinks?.thumbnail ?? '',
+              image: model.image??'',
             ),
             const SizedBox(
               width: 20,
@@ -34,7 +35,7 @@ class NewsetItem extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.sizeOf(context).width * .5,
                     child: Text(
-                      model.volumeInfo!.title!,
+                      model.title ??'',
                       style: Styles.style20.copyWith(fontFamily: KGt),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -44,7 +45,7 @@ class NewsetItem extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    model.volumeInfo!.authors![0],
+                    model.auther ??'',
                     style: Styles.textStyle18.copyWith(color: Colors.grey),
                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -56,8 +57,9 @@ class NewsetItem extends StatelessWidget {
                     children: [
                     const  Text(r'$19.9', style: Styles.style20),
                     const  Spacer(),
-                      Rating(rating: model.volumeInfo?.averageRating?.round(),
-                      count: model.volumeInfo!.pageCount!,
+                      Rating(rating: model.rate!
+                      ,
+                      count:model.count! ,
                       )
                     ],
                   )

@@ -23,12 +23,12 @@ class SimilarBook extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: GestureDetector(
                       onTap: () async {
-                        launchCustomURL(context,
-                            state.books[index].volumeInfo!.previewLink!);
+                        // launchCustomURL(context,
+                        //     state.books[index].volumeInfo!.previewLink!);
                       },
                       child: CustomImage(
                         image: state
-                            .books[index].volumeInfo!.imageLinks!.thumbnail!,
+                            .books[index].image ?? '',
                       ),
                     ),
                   );

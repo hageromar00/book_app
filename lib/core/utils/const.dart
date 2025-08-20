@@ -4,6 +4,7 @@ const Kcolor = Color(0xff100B20);
 const KGt = 'GT Sectra Fine';
 const Kfetchbook = 'fetch_book';
 const Knewbook = 'new_book';
+const Ksimbook = 'new_book';
 
 class AssestImage {
   static const logo = 'assets/images/Logo.png';

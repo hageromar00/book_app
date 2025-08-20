@@ -8,7 +8,7 @@ class FetchbookInitial extends FetchbookState {}
 class FetchbookLoad extends FetchbookState {}
 
 class FetchbookSuccess extends FetchbookState {
-  final List<BookModel> books;
+  final List<BookEntity> books;
 
   FetchbookSuccess( this.books);
 }

@@ -3,11 +3,13 @@ import 'package:book_app/Features/home/domain/entity/book_entity.dart';
 import 'package:book_app/core/utils/api_service.dart';
 import 'package:book_app/core/utils/const.dart';
 import 'package:book_app/core/utils/save_local_data.dart';
+import 'package:dartz/dartz.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class RemoteDate {
   Future<List<BookEntity>> fetchfeaturebookRemote();
   Future<List<BookEntity>> fetchNewestbookRemote();
+  Future<List<BookEntity>> SimilarbookRemote({required String category});
 }
 
 class RemoteDateImpl implements RemoteDate {
@@ -21,7 +23,7 @@ class RemoteDateImpl implements RemoteDate {
     for (var item in data["items"]) {
       book.add(BookModel.fromJson(item));
     }
-    saveLocalDate(book,Kfetchbook);
+    saveLocalDate(book, Kfetchbook);
     return book;
   }
 
@@ -39,7 +41,24 @@ class RemoteDateImpl implements RemoteDate {
     for (var item in data["items"]) {
       book.add(BookModel.fromJson(item));
     }
-     saveLocalDate(book,Knewbook);
+    saveLocalDate(book, Knewbook);
     return book;
   }
-}
+  
+  @override
+  Future<List<BookEntity>> SimilarbookRemote({required String category}) async{
+  
+      var data = await apiservice.getservice(
+          endpoint: 'volumes?Filtering=free-ebooks&Sorting=relevence&q=computer science');
+      List<BookModel> book = [];
+      // print("start");
+      for (var item in data['items']) {
+        book.add(BookModel.fromJson(item));
+      }
+      // print("hi");
+      saveLocalDate(book, Ksimbook);
+      return book;
+   
+  }
+  }
+

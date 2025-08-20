@@ -1,5 +1,6 @@
 import 'package:book_app/Features/home/data/model/book_model/book_model.dart';
 import 'package:book_app/Features/home/data/repo/home_repo_impl.dart';
+import 'package:book_app/Features/home/domain/entity/book_entity.dart';
 import 'package:book_app/Features/home/presentation/view_model/similar_book/similarbook_cubit.dart';
 import 'package:book_app/Features/home/presentation/views/home/details_book/details_views.dart';
 import 'package:book_app/Features/home/presentation/views/home/home_views.dart';
@@ -33,7 +34,7 @@ class AppRouter {
       builder: (context, state) => BlocProvider(
         create: (context) => SimilarbookCubit(getIt.get<HomeRepoImpl>()),
         child: DetailsViews(
-          model: state.extra as BookModel,
+          model: state.extra as BookEntity,
         ),
       ),
     ),

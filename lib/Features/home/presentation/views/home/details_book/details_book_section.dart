@@ -1,4 +1,5 @@
 import 'package:book_app/Features/home/data/model/book_model/book_model.dart';
+import 'package:book_app/Features/home/domain/entity/book_entity.dart';
 import 'package:book_app/Features/home/presentation/views/home/details_book/custom_app_details.dart';
 import 'package:book_app/Features/home/presentation/views/home/widget/Custom_image.dart';
 import 'package:book_app/Features/home/presentation/views/home/widget/rating.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class DetailsBookSection extends StatelessWidget {
   const DetailsBookSection({super.key,required this.model});
-  final BookModel model;
+  final BookEntity model;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +19,14 @@ class DetailsBookSection extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height * .4,
           child: CustomImage(
-            image: model.volumeInfo?.imageLinks?.thumbnail ??'',
+            image: model.image?? '',
           ),
         ),
         const SizedBox(
           height: 25,
         ),
         Text(
-          model.volumeInfo!.title!,
+          model.title?? '',
           style: Styles.textStyle20.copyWith(fontFamily: KGt),
         ),
         const SizedBox(
@@ -34,7 +35,7 @@ class DetailsBookSection extends StatelessWidget {
         Opacity(
           opacity: .8,
           child: Text(
-            model.volumeInfo!.authors![0],
+            model.auther ??'',
             style: Styles.textStyle14.copyWith(
                 fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
           ),
@@ -43,8 +44,8 @@ class DetailsBookSection extends StatelessWidget {
           height: 16,
         ),
          Rating(
-          rating: model.volumeInfo?.averageRating?.round(),
-          count: model.volumeInfo!.pageCount!,
+          rating: model.rate!,
+          count: model.count!,
           main: MainAxisAlignment.center,
         ),
         const SizedBox(

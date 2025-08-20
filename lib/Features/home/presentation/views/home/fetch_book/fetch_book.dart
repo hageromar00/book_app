@@ -1,8 +1,8 @@
 import 'package:book_app/Features/home/presentation/view_model/fetch_book/fetchbook_cubit.dart';
 import 'package:book_app/Features/home/presentation/views/home/widget/Custom_image.dart';
-import 'package:book_app/core/utils/help_launch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class FetchBook extends StatelessWidget {
   const FetchBook({super.key});
 
@@ -20,7 +20,7 @@ class FetchBook extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () async {
-                      launchCustomURL(context, state.books[index].volumeInfo!.previewLink!);
+                      // launchCustomURL(context, state.books[index].volumeInfo!.previewLink!);
                       // final Uri _url = Uri.parse(
                       //     state.books[index].volumeInfo!.previewLink!);
                       // if (!await launchUrl(_url)) {
@@ -29,11 +29,9 @@ class FetchBook extends StatelessWidget {
                       // GoRouter.of(context).push(AppRouter.ksimilar,extra: state.books[index]);
                     },
                     child: Padding(
-                      padding:const EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: CustomImage(
-                        image: state.books[index].volumeInfo?.imageLinks
-                                ?.thumbnail ??
-                            '',
+                        image: state.books[index].image ?? '',
                       ),
                     ),
                   );

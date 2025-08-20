@@ -9,8 +9,8 @@ class Rating extends StatelessWidget {
       required this.count,
       required this.rating});
   final MainAxisAlignment main;
-  final dynamic rating;
-  final int count;
+  final num rating;
+  final num count;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,8 @@ class Rating extends StatelessWidget {
           width: 6.3,
         ),
         Text(
-          rating.toString(),
+          // '$rating',
+           rating.toString(),
           style: Styles.textStyle16,
         ),
         const SizedBox(

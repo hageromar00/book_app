@@ -5,6 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 abstract class LocalData {
   List<BookEntity> fetchfeaturebookLocal();
   List<BookEntity> fetchNewestbookLocal();
+  List<BookEntity> fetchSiimilarbookLocal();
 }
 
 class LocalDataImpl implements LocalData {
@@ -17,6 +18,12 @@ class LocalDataImpl implements LocalData {
   @override
   List<BookEntity> fetchfeaturebookLocal() {
        var boxx = Hive.box<BookEntity>(Kfetchbook);
+    return boxx.values.toList();
+  }
+  
+  @override
+  List<BookEntity> fetchSiimilarbookLocal() {
+   var boxx = Hive.box<BookEntity>(Ksimbook);
     return boxx.values.toList();
   }
 }
