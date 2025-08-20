@@ -11,6 +11,7 @@ class FetchbookSuccess extends FetchbookState {
   final List<BookEntity> books;
 
   FetchbookSuccess( this.books);
+  
 }
 
 class FetchbookFail extends FetchbookState {

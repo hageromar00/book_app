@@ -24,6 +24,7 @@ class RemoteDateImpl implements RemoteDate {
       book.add(BookModel.fromJson(item));
     }
     saveLocalDate(book, Kfetchbook);
+      // اطبع أول لينك لو موجود
     return book;
   }
 
@@ -42,6 +43,7 @@ class RemoteDateImpl implements RemoteDate {
       book.add(BookModel.fromJson(item));
     }
     saveLocalDate(book, Knewbook);
+    print("Preview link from API: ${book[0].previewLink}");
     return book;
   }
   

@@ -3,6 +3,7 @@ import 'package:book_app/Features/home/domain/entity/book_entity.dart';
 import 'package:book_app/Features/home/presentation/views/home/details_book/custom_button.dart';
 import 'package:book_app/core/utils/help_launch.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 class ButtonDetails extends StatelessWidget {
   const ButtonDetails({super.key, required this.model});
   final BookEntity model;
@@ -28,6 +29,16 @@ class ButtonDetails extends StatelessWidget {
           Expanded(
             child: CustomButton(
               onPressed: () async {
+//                 if (model.link != null &&model.link != 'no_link') {
+//   final Uri url = Uri.parse(model.link!);
+//   if (!await launchUrl(url)) {
+//     throw Exception('Could not launch $url');
+//   }
+// } else {
+//   print("❌ No preview link available for this book");
+// }
+                // print("Preview link from API: ${model.volumeInfo?.previewLink}");
+                 launchCustomURL(context, model.previewLink);
                 // launchCustomURL(context, model.volumeInfo!.previewLink!);
                 // final Uri _url = Uri.parse(model.volumeInfo!.previewLink!);
                 // if (!await launchUrl(_url)) {
@@ -37,7 +48,7 @@ class ButtonDetails extends StatelessWidget {
               font: 16,
               backColor: const Color(0xffEF8262),
               textColor: Colors.white,
-              text:'previews',
+              text:'Previews',
               // text: getText(model),
               border: const BorderRadius.only(
                 bottomRight: Radius.circular(10),

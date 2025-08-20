@@ -32,8 +32,15 @@ class BookModel extends BookEntity {
           rate: volumeInfo?.averageRating ??0,
           count: volumeInfo?.pageCount ??0,
           title: volumeInfo?.title?? 'yj',
+          previewLink:_fixUrl(volumeInfo?.previewLink) ?? 'no_link',
         );
-
+  static String? _fixUrl(String? url) {
+    if (url == null || url.isEmpty) return null;
+    if (url.startsWith('http://')) {
+      return url.replaceFirst('http://', 'https://');
+    }
+    return url;
+  }
   factory BookModel.fromJson(Map<String, dynamic> json) => BookModel(
         kind: json['kind'] as String?,
         id: json['id'] as String?,
@@ -62,5 +69,6 @@ class BookModel extends BookEntity {
         'saleInfo': saleInfo?.toJson(),
         'accessInfo': accessInfo?.toJson(),
         'searchInfo': searchInfo?.toJson(),
+        'previewLink': volumeInfo?.previewLink,
       };
 }

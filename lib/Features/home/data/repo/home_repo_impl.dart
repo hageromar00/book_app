@@ -47,9 +47,16 @@ class HomeRepoImpl implements HomeRepo {
     try {
       booklist = await localdata.fetchNewestbookLocal();
       if (booklist.isNotEmpty) {
+//          print("Preview link from API: ${booklist[0].link}");
+//              for (var b in booklist) {
+//   print("Book title: ${b.title}");
+//   print("Preview link: ${b.link}");
+// }
         return right(booklist);
       }
       booklist = await remotedata.fetchNewestbookRemote();
+        // print("Prev API: ${booklist[0].link}");
+    
       return right(booklist);
     } catch (e) {
       return left(Failure(erormessage: e.toString()));
