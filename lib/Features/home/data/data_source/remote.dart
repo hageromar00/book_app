@@ -1,3 +1,45 @@
-abstract class RemoteDate{
-  
+import 'package:book_app/Features/home/data/model/book_model/book_model.dart';
+import 'package:book_app/Features/home/domain/entity/book_entity.dart';
+import 'package:book_app/core/utils/api_service.dart';
+import 'package:book_app/core/utils/const.dart';
+import 'package:book_app/core/utils/save_local_data.dart';
+import 'package:hive_flutter/adapters.dart';
+
+abstract class RemoteDate {
+  Future<List<BookEntity>> fetchfeaturebook();
+  Future<List<BookEntity>> fetchNewestbook();
+}
+
+class RemoteDateImpl implements RemoteDate {
+  final ApiService apiservice;
+  RemoteDateImpl(this.apiservice);
+  @override
+  Future<List<BookEntity>> fetchfeaturebook() async {
+    var data = await apiservice.getservice(
+        endpoint: 'volumes?Filtering=free-ebooks&q=programming');
+    List<BookEntity> book = [];
+    for (var item in data["items"]) {
+      book.add(BookModel.fromJson(item));
+    }
+    saveLocalDate(book,Kfetchbook);
+    return book;
+  }
+
+  // void saveLocalDate(List<BookEntity> book) {
+  //   var box = Hive.box<BookEntity>(Kfetchbook);
+  //   box.addAll(book);
+  // }
+
+  @override
+  Future<List<BookEntity>> fetchNewestbook() async {
+    var data = await apiservice.getservice(
+        endpoint:
+            'volumes?Filtering=free-ebooks&Sorting=newest &q=computer science');
+    List<BookEntity> book = [];
+    for (var item in data["items"]) {
+      book.add(BookModel.fromJson(item));
+    }
+     saveLocalDate(book,Knewbook);
+    return book;
+  }
 }
