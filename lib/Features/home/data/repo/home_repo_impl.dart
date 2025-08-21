@@ -1,10 +1,8 @@
 import 'package:book_app/Features/home/data/data_source/local.dart';
 import 'package:book_app/Features/home/data/data_source/remote.dart';
-import 'package:book_app/Features/home/data/model/book_model/book_model.dart';
 import 'package:book_app/Features/home/domain/entity/book_entity.dart';
 import 'package:book_app/Features/home/domain/repo/home_repo.dart';
 import 'package:book_app/core/error/fail.dart';
-import 'package:book_app/core/utils/api_service.dart';
 import 'package:dartz/dartz.dart';
 
 class HomeRepoImpl implements HomeRepo {
@@ -12,14 +10,14 @@ class HomeRepoImpl implements HomeRepo {
   final LocalData localdata;
   HomeRepoImpl({required this.localdata, required this.remotedata});
   @override
-  Future<Either<Failure, List<BookEntity>>> fetchbook() async {
+  Future<Either<Failure, List<BookEntity>>> fetchbook({int pageNum=0}) async {
     List<BookEntity> booklist;
     try {
-      booklist = await localdata.fetchfeaturebookLocal();
+      booklist = await localdata.fetchfeaturebookLocal(pageNumber: pageNum);
       if (booklist.isNotEmpty) {
         return right(booklist);
       }
-      booklist = await remotedata.fetchfeaturebookRemote();
+      booklist = await remotedata.fetchfeaturebookRemote(pageNumb: pageNum);
       return right(booklist);
     } catch (e) {
       return left(Failure(erormessage: e.toString()));

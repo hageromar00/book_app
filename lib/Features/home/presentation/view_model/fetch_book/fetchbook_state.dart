@@ -13,7 +13,13 @@ class FetchbookSuccess extends FetchbookState {
   FetchbookSuccess( this.books);
   
 }
+class FeaturedBooksPaginationLoading extends FetchbookState  {}
 
+class FeaturedBooksPaginationFailure extends FetchbookState {
+  final String errMessage;
+
+  FeaturedBooksPaginationFailure(this.errMessage);
+}
 class FetchbookFail extends FetchbookState {
   final String error;
 

@@ -9,10 +9,15 @@ part 'fetchbook_state.dart';
 class FetchbookCubit extends Cubit<FetchbookState> {
   FetchbookCubit(this.homerepo) : super(FetchbookInitial());
   final HomeRepo homerepo;
-  Future<void> FetchFeatureBook() async {
-    emit(FetchbookLoad());
+  Future<void> FetchFeatureBook({int pageNumber = 0}) async {
+    
+     if (pageNumber == 0) {
+      emit(FetchbookLoad());
+    } else {
+      emit(FeaturedBooksPaginationLoading());
+    }
     var result = await homerepo.fetchbook();
-    print('hhhhhhh iam in fetch book');
+    // print('hhhhhhh iam in fetch book');
     result.fold((l) => emit(FetchbookFail(l.erormessage)),
         (books) => emit(FetchbookSuccess(books)));
   }

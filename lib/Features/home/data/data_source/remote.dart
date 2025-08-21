@@ -7,7 +7,7 @@ import 'package:dartz/dartz.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class RemoteDate {
-  Future<List<BookEntity>> fetchfeaturebookRemote();
+  Future<List<BookEntity>> fetchfeaturebookRemote({int pageNumb=0});
   Future<List<BookEntity>> fetchNewestbookRemote();
   Future<List<BookEntity>> SimilarbookRemote({required String category});
 }
@@ -16,9 +16,9 @@ class RemoteDateImpl implements RemoteDate {
   final ApiService apiservice;
   RemoteDateImpl(this.apiservice);
   @override
-  Future<List<BookEntity>> fetchfeaturebookRemote() async {
+  Future<List<BookEntity>> fetchfeaturebookRemote({int pageNumb=0}) async {
     var data = await apiservice.getservice(
-        endpoint: 'volumes?Filtering=free-ebooks&q=programming');
+        endpoint: 'volumes?Filtering=free-ebooks&q=programming&startIndex=${pageNumb*10}');
     List<BookEntity> book = [];
     for (var item in data["items"]) {
       book.add(BookModel.fromJson(item));
